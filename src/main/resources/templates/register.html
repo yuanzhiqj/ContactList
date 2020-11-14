@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="loginCSS.css">
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script>
+        function examine(){
+            var userid = document.loginForm.userid.value;
+            var pass = document.loginForm.password.value;
+            var pass2 = document.loginForm.password2.value;
+            if(userid.length == 0) {
+                alert("请输入注册用户名!");
+                return false;
+            }
+            else if(pass.length == 0 || pass2.length==0){
+                alert("请输入密码!");
+                return false;
+            }
+            else if(pass != pass2)
+            {
+                alert("两次输入的密码不相同!");
+                return false;
+            }
+            else {
+                alert("注册成功!")
+                return true;
+            }
+
+        }
+    </script>
+</head>
+<body>
+<h1 align="center">通讯录系统</h1>
+<div id="content">
+    <form name="loginForm">
+        <div class="login-input-box">
+            <span class="inform">注册名</span>
+            <input name="userid" type="text" placeholder="请输入注册用户名" >
+        </div>
+        <div class="login-input-box">
+            <span class="inform">密码</span>
+            <input name="password" type="password" placeholder="请输入密码">
+        </div>
+        <div class="login-input-box">
+            <span class="inform">重复密码</span>
+            <input name="password2" type="password" placeholder="重复输入密码">
+        </div>
+    </form>
+    <div class="login-button-box">
+        <button onclick="examine()">提交</button></a>
+    </div>
+</div>
+</body>
+</html>

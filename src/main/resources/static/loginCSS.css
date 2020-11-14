@@ -1,0 +1,112 @@
+body{
+    background: url("../img/background.jpg") no-repeat fixed;
+    background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    color: gainsboro;
+}
+#content{
+
+    background-color: rgba(255, 255, 255, 0.95);
+    width: 420px;
+    height: 300px;
+    border: 1px solid #000000;
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 15%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.login-header{
+    width: 100%;
+    height: 48px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.login-header p{
+    color: red;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.login-input-box{
+    margin-top: 12px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+}
+
+.login-input-box input{
+    width: 340px;
+    height: 32px;
+    margin-left: 18px;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    padding-left: 60px;
+}
+
+.login-input-box input:hover{
+    border: 1px solid #ff7d0a;
+}
+
+.login-input-box input:after{
+    border: 1px solid #ff7d0a;
+}
+
+.login-input-box .icon{
+    width: 24px;
+    height: 24px;
+    margin: 6px 4px 6px 24px;
+    background-color: #ff7d0a;
+    display: inline-block;
+    position: absolute;
+    border-right: 1px solid #dcdcdc;
+}
+
+.login-button-box{
+    margin-top: 12px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+}
+
+.login-button-box button{
+    background-color: #ff7d0a;
+    color: #ffffff;
+    font-size: 16px;
+    width: 386px;
+    height: 40px;
+    margin-left: 18px;
+    border: 1px solid #ff7d0a;
+    border-radius: 4px;
+    margin: 10px;
+}
+
+.login-button-box button:hover{
+    background-color: #ee7204;
+}
+
+.login-button-box button:active{
+    background-color: #ee7204;
+}
+
+.login-input-box .inform{
+    font-size: 8px;
+    width: 50px;
+    height: 24px;
+    margin: 6px 4px 6px 24px;
+    display: inline-block;
+    position: absolute;
+    border-right: 1px solid #dcdcdc;
+}

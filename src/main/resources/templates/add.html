@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <script>
+        function check() {
+            if (checkName() && checkTele() && checkEmail()) {
+                alert("添加成功");
+                return true;
+            } else {
+                alert("添加失败");
+                return false;
+            }
+        }
+
+        function checkName() {
+            var name = document.myform.name.value;
+            if(name.length == 0){
+                alert("请输入名字");
+                return false;
+            }
+            return true;
+        }
+
+        function checkTele() {
+            var telep = document.myform.phone.value;
+            if(telep.length == 0) {
+                alert("请输入手机号");
+                return false;
+            }
+            else if(telep.length != 11){
+                alert("输入的手机号有误!");
+                return false;
+            }
+            else{
+                reg=/^[0-9]/;
+                for(i=0;i<telep.length;i++)
+                {
+                    if(!reg.test(telep[i])) {
+                        alert("只能输入数字");
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        function checkEmail() {
+            var email = document.myform.email.value;
+            var flag = email.indexOf("@"&&".");
+            if(email.length == 0){
+                alert("请输入电子邮箱");
+                return false;
+            }
+            else{
+                if(flag > 0)
+                {
+                    if(email.charAt(0)=="@"&&".") {
+                        alert("邮箱格式错误!")
+                        return false;
+                    }
+                }
+                else
+                {
+                    alert("邮箱格式错误");
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <form name="myform" class="table table-hover table-bordered" onsubmit="return check();" th:action="@{/add/post}" method="post"
+          th:object="${user}">
+        <table class="table table-hover table-bordered">
+            <tr>
+                <th>姓名</th>
+                <td><input type="text" name="" class="form-control" id="name" th:field="*{name}"/></td>
+            </tr>
+            <tr>
+                <th>电话</th>
+                <td><input type="text" name="" class="form-control" id="phone" th:field="*{phone}"/></td>
+            </tr>
+            <tr>
+                <th>邮箱</th>
+                <td><input type="text" name="" class="form-control" id="email" th:field="*{email}"/></td>
+            </tr>
+            <tr>
+                <th>住址</th>
+                <td><input type="text" name="" class="form-control" id="home" th:field="*{address}"/></td>
+            </tr>
+            <tr>
+                <th>QQ号</th>
+                <td><input type="text" name="" class="form-control" id="QQ" th:field="*{qq}"/></td>
+            </tr>
+        </table>
+        <input type="submit" value="提交">
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="loginCSS.css">
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script>
+        function login(){
+            var userid = document.loginForm.userid.value;
+            var pass = document.loginForm.password.value;
+            if(userid == "123"&&pass == "123") {
+                alert("登录成功");
+                //window.location.href="list.html";
+                return true;
+            }
+            else
+            {
+                alert("登录失败，账号或密码错误");
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+<h1 align="center">通讯录系统</h1>
+<div id="content">
+    <div class="login-header">
+        <p>测试用户名为123，密码为123</p>
+    </div>
+    <form name="loginForm" th:action="@{/login/flag}" method="post">
+        <div class="login-input-box">
+            <span class="inform">用户名</span>
+            <input name="userid" type="text" placeholder="请输入用户名" >
+        </div>
+        <div class="login-input-box">
+            <span class="inform">密码</span>
+            <input name="password" type="password" placeholder="请输入密码">
+        </div>
+        <div class="login-button-box">
+            <button onclick="login()" type="submit">登录</button>
+            <a href="register.html"><button>注册</button></a>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>
