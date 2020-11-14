@@ -17,5 +17,6 @@ public class LoginConfig implements WebMvcConfigurer {
                 "/login",
                 "/login/flag"
         );
+
     }
 }

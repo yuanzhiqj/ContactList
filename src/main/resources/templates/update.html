@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form name="myform" class="table table-hover table-bordered" onsubmit="return check();" th:action="@{'/update/post/'+${curid}}" method="post"
+      th:object="${user}">
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>姓名</th>
+            <td><input type="text" name="" class="form-control" id="name" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <th>电话</th>
+            <td><input type="text" name="" class="form-control" id="phone" th:field="*{phone}"/></td>
+        </tr>
+        <tr>
+            <th>邮箱</th>
+            <td><input type="text" name="" class="form-control" id="email" th:field="*{email}"/></td>
+        </tr>
+        <tr>
+            <th>住址</th>
+            <td><input type="text" name="" class="form-control" id="home" th:field="*{address}"/></td>
+        </tr>
+        <tr>
+            <th>QQ号</th>
+            <td><input type="text" name="" class="form-control" id="QQ" th:field="*{qq}"/></td>
+        </tr>
+    </table>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>

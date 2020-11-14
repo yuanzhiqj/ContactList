@@ -17,6 +17,7 @@
 <body>
     <table border="1" class="table table-hover table-bordered" id="mytable">
         <tr>
+            <th>id</th>
             <th>姓名</th>
             <th>电话</th>
             <th>邮箱</th>
@@ -33,14 +34,23 @@
             <td><input type="submit" value="删除" class="btn btn-info" ></td>
         </tr> -->
         <tr th:each="contact : ${user}">
+            <td th:text="${contact.curid}"></td>
             <td th:text="${contact.name}"></td>
             <td th:text="${contact.phone}"></td>
             <td th:text="${contact.email}"></td>
             <td th:text="${contact.address}"></td>
-            <td th:text="${contact.qq}">
-            <td><input type="submit" value="编辑" class="btn btn-primary" id="reset"></td>
+            <td th:text="${contact.qq}"></td>
+            <!--
+            <form th:href="@{'/list/update/'+${contact.id}}" method="get">
+                <td><input type="submit" value="编辑" class="btn btn-primary"></td>
+            </form>-->
 
-            <form th:action="@{'/list/delete/'+${contact.id}}" method="post">
+            <form th:action="@{'/list/update/'+${contact.curid}}" method="get">
+                <td><input type="submit" value="更新" class="btn btn-info"></td>
+            </form>
+
+
+            <form th:action="@{'/list/delete/'+${contact.curid}}" method="post">
                 <td><input type="submit" value="删除" class="btn btn-info"></td>
             </form>
         </tr>

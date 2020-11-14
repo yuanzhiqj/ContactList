@@ -2,6 +2,7 @@ package com.example.demo.Entity;
 
 public class Contack {
     private static int id;
+    private int curid;
     private String name;
     private String phone;
     private String email;
@@ -9,7 +10,7 @@ public class Contack {
     private String address;
 
     public Contack(String name, String phone, String email, String qq, String address) {
-        this.id = id;
+        this.curid = id;
         id++;
         this.name = name;
         this.phone = phone;
@@ -19,14 +20,23 @@ public class Contack {
     }
 
     public Contack(){
-
+        this.curid = id;
     }
     public Contack(int id){
         this.id = id;
+        this.curid = id;
     }
 
     public int getId() {
         return id;
+    }
+
+    public int getCurid() {
+        return curid;
+    }
+
+    public void setCurid(int curid) {
+        this.curid = curid;
     }
 
     public void setId(int id) {

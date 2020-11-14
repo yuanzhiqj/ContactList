@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -36,10 +37,21 @@ public class controller {
     @RequestMapping("/add")
     public ModelAndView Add(Model model){
         model.addAttribute("user",new Contack(id));
+        System.out.println("id"+id);
         id+=1;
         model.addAttribute("title","添加联系人");
         ModelAndView modelAndView = new ModelAndView("add","userModel",model);
         return modelAndView ;
+    }
+
+    @RequestMapping("/update/{curid}")
+    public String Update(@PathVariable("curid") int id,Model model){
+        return "update";
+    }
+
+    @RequestMapping("/list/update/{curid}")
+    public String ListUpdate(@PathVariable("curid") int id,Model model){
+        return "update";
     }
 
     @PostMapping(value="/login/flag")
@@ -59,12 +71,12 @@ public class controller {
     @PostMapping(value = "/add/post")
     public String ADD(Contack contack){
         userList.add(contack);
-        System.out.println(contack.getId());
+        System.out.println(contack.getCurid());
         return "redirect:/list";
     }
 
-    @PostMapping(value = "/list/delete/{id}")
-    public String deleteUser(@PathVariable("id") int id){
+    @PostMapping(value = "/list/delete/{curid}")
+    public String deleteUser(@PathVariable("curid") int id){
         System.out.println("删除"+id);
         /*String tmp = id;
         tmp.replace("{","");
@@ -73,13 +85,45 @@ public class controller {
         Iterator<Contack> iter = userList.iterator();
         while (iter.hasNext()) {
             Contack tp = iter.next();
-            if (tp.getId() == id) {
+            if (tp.getCurid() == id) {
                 iter.remove();
                 System.out.println("删除成功");
                 break;
             }
         }
+        return "redirect:/list";
+    }
 
+    @GetMapping(value = "/list/update/{curid}")
+    public ModelAndView update(@PathVariable("curid") int id,Model model){
+        System.out.println("更新"+id);
+        Iterator<Contack> iter = userList.iterator();
+        while (iter.hasNext()) {
+            Contack tp = iter.next();
+            System.out.println(tp.getCurid()+tp.getName());
+            if (tp.getCurid() == id) {
+                System.out.println(tp.getName());
+                model.addAttribute("user",tp);
+                break;
+            }
+        }
+        ModelAndView modelAndView = new ModelAndView("update","userModel",model);
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/update/post/{curid}")
+    public String updatePost(@PathVariable("curid")int id, Contack contack,Model model){
+        int tempid = contack.getCurid();
+        System.out.println("更新完毕"+id);
+        Iterator<Contack> iter = userList.iterator();
+
+        while (iter.hasNext()) {
+            Contack tp = iter.next();
+            if (tp.getCurid() == tempid) {
+                Collections.replaceAll(userList,tp,contack);
+                break;
+            }
+        }
         return "redirect:/list";
     }
 }
