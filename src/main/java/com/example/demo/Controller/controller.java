@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 import com.example.demo.Entity.Contack;
 
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,7 @@ public class controller {
     @RequestMapping("/add")
     public ModelAndView Add(Model model){
         model.addAttribute("user",new Contack(id));
-        System.out.println("id"+id);
+        //System.out.println("id"+id);
         id+=1;
         model.addAttribute("title","添加联系人");
         ModelAndView modelAndView = new ModelAndView("add","userModel",model);
@@ -71,13 +72,13 @@ public class controller {
     @PostMapping(value = "/add/post")
     public String ADD(Contack contack){
         userList.add(contack);
-        System.out.println(contack.getCurid());
+        //System.out.println(contack.getCurid());
         return "redirect:/list";
     }
 
     @PostMapping(value = "/list/delete/{curid}")
     public String deleteUser(@PathVariable("curid") int id){
-        System.out.println("删除"+id);
+        //System.out.println("删除"+id);
         /*String tmp = id;
         tmp.replace("{","");
         tmp.replace("}","");*/
@@ -87,7 +88,7 @@ public class controller {
             Contack tp = iter.next();
             if (tp.getCurid() == id) {
                 iter.remove();
-                System.out.println("删除成功");
+                //System.out.println("删除成功");
                 break;
             }
         }
@@ -96,13 +97,13 @@ public class controller {
 
     @GetMapping(value = "/list/update/{curid}")
     public ModelAndView update(@PathVariable("curid") int id,Model model){
-        System.out.println("更新"+id);
+        //System.out.println("更新"+id);
         Iterator<Contack> iter = userList.iterator();
         while (iter.hasNext()) {
             Contack tp = iter.next();
-            System.out.println(tp.getCurid()+tp.getName());
+            //System.out.println(tp.getCurid()+tp.getName());
             if (tp.getCurid() == id) {
-                System.out.println(tp.getName());
+                //System.out.println(tp.getName());
                 model.addAttribute("user",tp);
                 break;
             }
@@ -114,7 +115,7 @@ public class controller {
     @PostMapping(value = "/update/post/{curid}")
     public String updatePost(@PathVariable("curid")int id, Contack contack,Model model){
         int tempid = contack.getCurid();
-        System.out.println("更新完毕"+id);
+        //System.out.println("更新完毕"+id);
         Iterator<Contack> iter = userList.iterator();
 
         while (iter.hasNext()) {
@@ -125,5 +126,28 @@ public class controller {
             }
         }
         return "redirect:/list";
+    }
+
+    //ajax判断手机号是否相等
+    @RequestMapping(value = "/add/phone")
+    public @ResponseBody void phone(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        String LOGIN_PHONE= request.getParameter("inputPhone");
+        System.out.println("phone"+LOGIN_PHONE);
+        Iterator<Contack> iter = userList.iterator();
+        int flag = 1;
+        while (iter.hasNext()) {
+            Contack tp = iter.next();
+            if (tp.getPhone().equals(LOGIN_PHONE)) {
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write("0");
+                flag = 0;
+                System.out.println("重复");
+                break;
+            }
+        };
+        if(flag==1) {
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write("1");
+        }
     }
 }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title th:text="${title}"></title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
     <script>
@@ -53,27 +53,57 @@
 
         function checkEmail() {
             var email = document.myform.email.value;
-            var flag = email.indexOf("@"&&".");
-            if(email.length == 0){
+            var flag = email.indexOf("@" && ".");
+            if (email.length == 0) {
                 alert("请输入电子邮箱");
                 return false;
-            }
-            else{
-                if(flag > 0)
-                {
-                    if(email.charAt(0)=="@"&&".") {
+            } else {
+                if (flag > 0) {
+                    if (email.charAt(0) == "@" && ".") {
                         alert("邮箱格式错误!")
                         return false;
                     }
-                }
-                else
-                {
+                } else {
                     alert("邮箱格式错误");
                     return false;
                 }
             }
             return true;
         }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#phone').blur(function () {
+                var input_phone = document.getElementById("phone").value;
+                var JSONobject = {
+                    "inputPhone":input_phone
+                };
+                $.ajax({
+                    type:'GET',
+                    url:"http://localhost:8080/add/phone",
+                    dataType:"text",
+                    data:JSONobject,
+                    async:false,
+                    success: function(responsedata) {
+                        var x = parseInt(responsedata)
+                        if(x == 0) {
+                            alert("注意, 电话号码重复!");
+                            /*
+                            $("#phone").tips({
+                                side:3,
+                                msg:'电话号码重复',
+                                bg:'#AE81FF',
+                                time:2
+                            });*/
+                            //$("#phone").focus();
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus,errorThrown) {
+                        alert("失败");
+                    }
+                });
+            });
+        });
     </script>
 </head>
 <body>
